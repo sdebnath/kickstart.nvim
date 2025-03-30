@@ -234,8 +234,7 @@ sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
 ##### Linux aarch64 Notes
 
 - To get pyright LSP working, install nodejs and npm
-- Need to setup mason to pick up the correct clangd. Source: https://github.com/williamboman/mason.nvim/issues/1578
-
+- Need to setup mason to pick up the correct clangd. Source: https://github.com/williamboman/mason.nvim/issues/1578#issuecomment-2725266573
 ```
 sudo install clangd jq
 mkdir -p ~/.local/share/nvim/mason/packages/clangd/mason-schemas
