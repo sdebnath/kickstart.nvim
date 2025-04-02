@@ -544,6 +544,12 @@ require('lazy').setup({
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
+          -- Lists LSP incoming calls for word under the cursor
+          map('<leader>ic', require('telescope.builtin').lsp_incoming_calls, '[I]ncoming Calls')
+
+          -- Lists LSP outgoing calls for word under the cursor
+          map('<leader>oc', require('telescope.builtin').lsp_outgoing_calls, '[O]utgoing Calls')
+              
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
