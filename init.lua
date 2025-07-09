@@ -634,6 +634,23 @@ require('lazy').setup({
         end,
       })
 
+      -- Scan startup CWD for compile_commands.json, if so initialize LSP
+      local lspconfig = require 'lspconfig'
+      local util = require 'lspconfig.util'
+
+      local cwd = vim.loop.cwd()
+      local compile_commands = cwd .. '/compile_commands.json'
+
+      if vim.fn.filereadable(compile_commands) == 1 then
+        local root_dir = util.root_pattern('compile_commands.json', '.git')(cwd) or cwd
+
+        vim.lsp.start {
+          name = 'clangd',
+          cmd = { 'clangd', '--compile-commands-dir=.' },
+          root_dir = root_dir,
+        }
+      end
+
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
