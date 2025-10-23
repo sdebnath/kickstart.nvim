@@ -1,0 +1,3 @@
+[submodule "sd"]
+	path = lua/sd
+	url = https://github.com/sdebnath/kickstart-sd.nvim.git
