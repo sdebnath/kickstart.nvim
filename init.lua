@@ -768,7 +768,13 @@ do
   --    :Mason
   --
   -- You can press `g?` for help in this menu.
-  local ensure_installed = vim.tbl_keys(servers or {})
+  -- NOTE: @sd: on arm64, clangd is excluded from mason management. Mason has
+  -- no prebuilt clangd binary for linux_arm64, so it fails install on every
+  -- start ("The current platform is unsupported."). We rely on the system
+  -- clangd (apt-installed) on $PATH instead; it's still enabled below via
+  -- vim.lsp.enable, just not installed/managed by mason-tool-installer.
+  local is_arm64 = vim.tbl_contains({ 'arm64', 'aarch64' }, vim.uv.os_uname().machine)
+  local ensure_installed = vim.tbl_filter(function(name) return not (is_arm64 and name == 'clangd') end, vim.tbl_keys(servers or {}))
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
   })
